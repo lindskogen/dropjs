@@ -1,5 +1,5 @@
 /*
- * drop.js v0.4
+ * drop.js v0.5
  * Copyright 2012, Johan Lindskogen
  *
  * Useage: drop( element, callback(fileData) )
@@ -9,6 +9,10 @@
  */
 
 function drop(zone, callback) {
+	if (window.location.protocol === "file:")
+		throw new Error("File cannot be accessed via the file protocol.");
+	else if (!zone)
+		throw new Error("Dropzone is not valid.");
 	var fileData = {};
 	function cancel(event) {
 		event.stopPropagation();
